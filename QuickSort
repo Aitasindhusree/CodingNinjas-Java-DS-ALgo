@@ -1,0 +1,78 @@
+/*Sort an array A using Quick Sort.
+Change in the input array itself. So no need to return or print anything.
+INPUT FORMAT
+Line 1 : Integer n i.e. Array size
+Line 2 : Array elements (separated by space)
+OUTPUT FORMAT
+Array elements in increasing order (separated by space)
+CONSTRAINTS
+1 <= n <= 10^3
+SAMPLE INPUT1
+6 
+2 6 8 5 4 3
+SAMPLE OUTPUR
+2 3 4 5 6 8*/
+
+package Recursion2;
+
+public class quicksort {
+
+	
+	private static void quicksort(int[]input,int si,int ei){
+        if(si>=ei){
+            return;
+        }
+        int pivotpos=partition(input,si,ei);
+        quicksort(input,si,pivotpos-1);
+        quicksort(input,pivotpos+1,ei);
+    }
+    private static int partition(int[] input,int si,int ei){
+        //int pivot=input[si];
+        int count=0;
+        for(int i=si+1;i<=ei;i++){
+            if(input[i]<=input[si])
+            { count++;}
+        }
+       
+        int pivotpos=si+count;
+        //swap si with pivotpos
+        int temp=input[pivotpos];
+        input[pivotpos]=input[si];
+        input[si]=temp;
+        //rearrange the left to smaller and equal than pivot and right to greated than pivot values in input[]
+        int j=si,k=ei;
+        while(j<pivotpos && k>pivotpos){
+           if(input[j]<=input[pivotpos]){
+               j++;
+           } 
+            else{
+                if(input[k]>input[pivotpos])
+                    {k--;}
+                else{
+                    int temp1=input[k];
+                    input[k]=input[j];
+                    input[j]=temp1;
+                    k--;
+                    j++;
+                }
+            }
+            
+        }
+        
+      return pivotpos;  
+    } 
+    
+    
+    public static void quickSort(int[] input) {
+		quicksort(input,0,input.length-1);
+		for(int x=0;x<input.length;x++) {
+	    	  System.out.print(input[x]+" ");
+	      }
+		
+	}
+	public static void main(String[] args) {
+		int input[]= {6,2,20,8,15,3,4};
+		  quickSort(input);  
+	}
+
+}
