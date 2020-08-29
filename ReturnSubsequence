@@ -1,0 +1,52 @@
+/*INPUT FORMAT
+integer n
+OUTPUT FORMAT
+All possible strings in different lines
+CONSTRAINTS
+1 <= n <= 10^6
+SAMPLE INPUT
+xyz
+SAMPLE OUTPUT
+
+z
+y
+yz
+x
+xz
+xy
+xyz
+CODE*/
+package Recursion2;
+
+public class Subsequence {
+
+	public static String[] findsubsequence(String str) {
+		if(str.length()==0) {
+			String ans[]={""};
+			return ans;
+		}
+		String smallans[]=findsubsequence(str.substring(1));
+		String ans[]=new String[2*smallans.length];
+		int k=0;
+		for(int i=0;i<smallans.length;i++) {
+			ans[k]=smallans[i];
+			k++;
+		}
+		for(int i=0;i<smallans.length;i++) {
+			ans[k]=str.charAt(0)+smallans[i];
+			k++;
+		}
+		return ans;
+		
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+      String str="xyz";
+      String ans[]=findsubsequence(str);
+      for(int j=0;j<ans.length;j++) {
+    	  System.out.println(ans[j]);
+      }
+      
+	}
+
+}
