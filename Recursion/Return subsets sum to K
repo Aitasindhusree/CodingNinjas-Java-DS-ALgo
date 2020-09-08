@@ -1,0 +1,70 @@
+/*Given an array A of size n and an integer K, return all subsets of A which sum to K.
+Subsets are of length varying from 0 to n, that contain elements of the array. But the order of elements should remain same as in the input array.
+Note : The order of subsets are not important.
+Input format :
+Line 1 : Integer n, Size of input array
+Line 2 : Array elements separated by space
+Line 3 : K 
+Constraints :
+1 <= n <= 20
+Sample Input :
+9 
+5 12 3 17 1 18 15 3 17 
+6
+Sample Output :
+3 3
+5 1*/
+package Recursion2;
+
+public class printsubsetswithsum {
+
+	private static int[][] subsetsSumK(int input[],int si,int sum) {
+		if ( si == input.length) {
+             if(sum==0)
+			     {int output[][] = new int[1][0];
+			     return output;}
+             else
+                 {int output[][] = new int[0][0];
+                 return output;}
+			}
+		int temp1[][]=subsetsSumK(input,si+1,(sum-input[si]));
+		int temp2[][]=subsetsSumK(input,si+1,sum);
+		int output[][] = new int[temp1.length+temp2.length][];
+		int k = 0;
+
+		for (int i = 0; i < temp1.length; i++) {
+		output[k] = new int[temp1[i].length+1];
+		output[k][0] = input[si];
+		for (int j = 1; j <= temp1[i].length; j++) {
+		output[k][j] = temp1[i][j-1];
+		}
+		k++;}
+
+		for (int i = 0; i < temp2.length; i++) {
+		output[k] = new int[temp2[i].length];
+		for (int j = 0; j <temp2[i].length; j++) {
+		output[k][j] = temp2[i][j];
+		}
+		k++;
+		}
+		return output;
+		}
+	public static int[][] subsetsSumK(int input[], int k) {
+		int output[][]=subsetsSumK(input,0,k);
+		return output;
+
+	}
+	public static void main(String[] args) {
+		int input[]= {3,2,5,1,4,6};
+		int sum=8;
+		int output[][]=subsetsSumK(input,sum);
+		
+	for(int i=0;i<output.length;i++) {
+		for(int j=0;j<output[i].length;j++) {
+			System.out.print(output[i][j]+" ");
+		}
+		System.out.println();
+	}
+	}
+
+}
