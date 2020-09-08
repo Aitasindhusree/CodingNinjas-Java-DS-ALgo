@@ -1,0 +1,58 @@
+
+/*Given an integer array (of length n), find and return all the subsets of input array.
+Subsets are of length varying from 0 to n, that contain elements of the array. But the order of elements should remain same as in the input array.
+Note : The order of subsets are not important.
+Input format :
+
+Line 1 : Size of array
+
+Line 2 : Array elements (separated by space)
+SAMPLE INPUT:
+3
+15 20 12
+SAMPLE OUTPUT:
+[] (this just represents an empty array, don't worry about the square brackets)
+12 
+20 
+20 12 
+15 
+15 12 
+15 20 
+15 20 12
+CODE:*/
+package Recursion2;
+
+public class printsubsets {
+
+	private static void printsubsets(int input[],int si,int output[]){
+        if(si==input.length){
+            for(int i=0;i<output.length;i++){
+                System.out.print(output[i]+" ");
+            }
+            System.out.println();
+            return;}
+            
+            int[] newout=new int[output.length+1];
+            for(int j=0;j<output.length;j++){
+                newout[j]=output[j];
+            }
+            newout[output.length]=input[si];
+            
+            printsubsets(input,si+1,output);
+            printsubsets(input,si+1,newout);
+        }
+
+    
+    public static void printSubsets(int input[]) {
+		int[] output= {};
+        printsubsets(input,0,output);
+
+	}
+	
+	
+	public static void main(String[] args) {
+		int[] input= {1,2,3};
+		printSubsets(input);
+	}
+
+}
