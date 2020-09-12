@@ -1,0 +1,56 @@
+/*Assume that the value of a = 1, b = 2, c = 3, ... , z = 26. You are given a numeric string S. Write a program to return the list of all possible codes that can be generated from the given string.
+Note : The order of codes are not important. And input string does not contain 0s.
+Input format :
+A numeric string
+Constraints :
+1 <= Length of String S <= 10
+Sample Input:
+1123
+Sample Output:
+aabc
+kbc
+alc
+aaw
+kw
+CODE*/
+public class ReturnAllCodesFromString {
+	
+	public static  String[] getCode(String input){
+		if(input.length()==0) {
+			String output[]= {""};
+			 return output;
+		}
+		String temp1[]=getCode(input.substring(1));
+		String s1=""+input.charAt(0);
+		int firstdigit=Integer.parseInt(s1); 
+		String temp2[]=new String[0];
+		int twodigits=0;
+		if(input.length()>=2) {
+			String s2=""+input.charAt(0)+input.charAt(1);
+			twodigits=Integer.parseInt(s2);
+		    if(twodigits>=10 && twodigits<=26) 
+		      {temp2=getCode(input.substring(2));}}
+		   String output[]=new String[temp1.length+temp2.length];
+		   int k=0;
+			for(int p=0;p<temp1.length;p++) {
+				output[p]=getchar(firstdigit)+temp1[p];
+				k++;
+			}
+			for(int q=0;q<temp2.length;q++) {
+				output[k+q]=getchar(twodigits)+temp2[q];
+			}
+		  return output;}
+
+    private static char getchar(int x) {
+    	return (char)(96 + x);
+    }
+	public static void main(String[] args) {
+		String s="1123";
+		String[] output=getCode(s);
+		for(int i=0;i<output.length;i++) {
+			System.out.println(output[i]);
+		}	
+
+	}
+
+}
