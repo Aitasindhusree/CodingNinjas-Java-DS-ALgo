@@ -1,0 +1,60 @@
+/*Assume that the value of a = 1, b = 2, c = 3, ... , z = 26. You are given a numeric string S. Write a program to print the list of all possible codes that can be generated from the given string.
+Note : The order of codes are not important. Just print them in different lines.
+Input format :
+A numeric string S
+Output Format :
+All possible codes in different lines
+Constraints :
+1 <= Length of String S <= 10
+Sample Input:
+1123
+Sample Output:
+aabc
+kbc
+alc
+aaw
+kw
+CODE:*/
+package Recursion2;
+
+public class PrintAllCodesFromString {
+ 
+	private static void printAllPossibleCodes(String input,String output) {
+        if(input.length() == 0) {
+			System.out.println(output);
+			return;
+		}
+		String firstNum = input.substring(0,  1);
+		int num1 = Integer.parseInt(firstNum);
+		char alphabet1 = getchar(num1);
+		printAllPossibleCodes(input.substring(1), output + alphabet1);
+		
+		if(input.length() >=2) {
+			String firstTwoNos = input.substring(0,2);
+			int num2 = Integer.parseInt(firstTwoNos);
+			if(num2 >= 10 && num2 <= 26) {
+				char alphabet2 = getchar(num2);
+				printAllPossibleCodes(input.substring(2), output + alphabet2);
+			}
+		}
+		
+	
+	}
+	
+	 private static char getchar(int x) {
+	    	return (char)(96 + x);
+	    }
+
+	
+	public static void printAllPossibleCodes(String input) {
+		String output="";
+		printAllPossibleCodes(input,output);
+
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String s="1123";
+		printAllPossibleCodes(s);
+	}
+
+}
