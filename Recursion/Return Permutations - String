@@ -1,0 +1,66 @@
+/*Given a string S, find and return all the possible permutations of the input string.
+Note 1 : The order of permutations is not important.
+Note 2 : If original string contains duplicate characters, permutations will also be duplicates.
+Input Format :
+String S
+Output Format :
+All permutations (in different lines)
+Sample Input :
+abc
+Sample Output :
+abc
+acb
+bac
+bca
+cab
+cba
+CODE*/
+package Recursion2;
+
+public class ReturnPermutationsString {
+
+	public static String[] permutationOfString(String input){
+		if(input.length()==1) {
+			String[] output=new String[1];
+			output[0]=input;
+			return output;
+		}
+		String[] temp=permutationOfString(input.substring(1));
+		String output[]=new String[fact(input.length())];
+		int k=0;
+		for(int i=0;i<temp.length;i++) {
+			for(int j=0;j<=temp[i].length();j++) {
+				if(j==0) {
+					output[k]=input.charAt(0)+temp[i];
+					k++;
+				}
+				else if(j==temp[i].length()) {
+					output[k]=temp[i]+input.charAt(0);
+					k++;
+				}
+				else {
+					output[k]=temp[i].substring(0,j)+input.charAt(0)+temp[i].substring(j);
+					k++;
+				}
+				
+			}
+		}
+		return output;
+	}
+	
+	private static int fact(int x) {
+		if(x==1 || x==0) {
+			return 1;
+		}
+		return x*fact(x-1);
+	}
+	public static void main(String[] args) {
+            String s="ab";
+		String[] output=permutationOfString(s);
+		for(int i=0;i<output.length;i++) {
+			System.out.println(output[i]);
+		}	
+
+	}
+
+}
