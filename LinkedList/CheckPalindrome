@@ -1,0 +1,65 @@
+public class palindrome {
+
+	 public static boolean isPalindrome(Node<Integer> head) 
+	{ if(head == null)
+	         { return true; } 
+	Node<Integer> midpoint = middleNode(head);
+	Node<Integer>head2 = midpoint.next; 
+	midpoint.next = null;
+	Node<Integer> rev_head2 = printReverse(head2); 
+	while(rev_head2 != null )
+	{ if(head.data == rev_head2.data)
+	{ head = head.next; rev_head2 = rev_head2.next; } 
+	else{ return false; } } 
+	return true; }
+	
+	public static Node<Integer> middleNode (Node<Integer>head)
+	{ Node<Integer> slow = head; 
+	  Node<Integer> fast = head; 
+	while(fast.next != null && fast.next.next != null)
+	{ slow=slow.next; 
+	fast=fast.next.next; } 
+	return slow; } 
+
+
+	public static Node<Integer> printReverse(Node<Integer> head) {
+		if(head == null) { 
+            return head; 
+        } 
+        if(head.next == null) { 
+            return head; 
+        } 
+        Node<Integer> newHeadNode = printReverse(head.next); 
+        head.next.next = head; 
+        head.next = null; 
+        return newHeadNode;         
+	}
+  
+	public static Node<Integer> takeInput(){
+		Node<Integer>head=null,tail=null;
+		Scanner s=new Scanner(System.in);
+		int data=s.nextInt();
+		while(data!=-1) {
+			Node<Integer> newNode=new Node<>(data);
+			if(head==null) {
+				head=newNode;
+				tail=newNode;
+			}
+			else {
+				tail.next=newNode;
+				tail=newNode;
+			}
+			data=s.nextInt();
+		}
+		return head;
+		
+	}
+	
+	
+	public static void main(String[] args) {
+		Node<Integer> head=takeInput();
+		boolean b=isPalindrome(head);
+	      System.out.println(b);
+	}
+
+}
