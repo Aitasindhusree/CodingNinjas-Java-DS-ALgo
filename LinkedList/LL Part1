@@ -1,0 +1,163 @@
+package LS;
+
+import java.util.Scanner;
+
+public class LLtakeInput {
+	
+  //To find LinkedList length
+	public static int LLlength(Node<Integer> head) {
+	        int count=0;
+	        while(head!=null) {
+	    	  head=head.next;
+	            count++;}
+	        return count;
+	}
+	
+	//To append last N numbers to first
+	public static Node<Integer> appendLastNToFirst(Node<Integer> head, int n) {
+        Node<Integer> temp1=head,temp2=head;
+        int count=LLlength(head);
+        	
+        int i=0;
+        while(i<(count-n-1)){
+            temp1=temp1.next;
+            i++;
+        }
+        head=temp1.next;
+        temp1.next=null;
+        temp1=head;
+        i=0;
+        while(i<n-1){
+            temp1=temp1.next;
+            i++;
+        }
+        System.out.println(temp1.data);
+        temp1.next=temp2;
+        return head;
+	}
+
+  //Check whether given LL is palindrome
+	public static boolean checkpalindrome(Node<Integer> head) {
+		int count=LLlength(head);
+		Node<Integer>temp1=head;
+		Node<Integer>temp2=printReverse(head);
+		while(temp1!=null && temp2!=null) {
+			if(temp1.data.equals(temp2.data)) {
+				temp1=temp1.next;
+				temp2=temp2.next;
+			}
+			else
+				return false;
+		}
+		if(temp1==null && temp2==null)
+		     {return true;}
+		return false;
+		}
+	
+	//Print the given LL in reverse	
+	public static Node<Integer> printReverse(Node<Integer> head) {
+		if(head == null) { 
+            return head; 
+        } 
+        if(head.next == null) { 
+            return head; 
+        } 
+        Node<Integer> newHeadNode = printReverse(head.next); 
+        head.next.next = head; 
+        head.next = null; 
+        return newHeadNode;         
+	}
+  
+  //Remove duplicate elements
+	public static Node<Integer> removeDuplicates(Node<Integer> head) {
+		//Your code goes 
+       Node<Integer> temp=head;
+        if(head==null ||  head.next==null){
+            return head;
+        }
+        while(temp.next!=null){
+               if(temp.data.equals((temp.next).data)){
+                   temp.next = temp.next.next;
+                }else{
+                     temp = temp.next;
+                 }
+             }
+        return head;
+	}
+	
+	//Delete an element from LL
+	public static Node<Integer> delete(Node<Integer> head,int pos){
+		if(pos==0) {
+			head=head.next;
+			return head;
+		}
+		int i=0;
+		Node<Integer> temp=head;
+		while(i<pos-1) {
+			temp=temp.next;
+			i++;
+		}
+		temp.next=temp.next.next;
+		return head;
+		
+	}
+	
+  
+  //Insert element in LL
+	public static Node<Integer> insert(Node<Integer> head, int data, int pos){
+		Node<Integer> newNode=new Node<>(data);
+		if(pos==0) {
+			newNode.next=head;
+			return newNode;
+		}
+		int i=0;
+		Node<Integer> temp=head;
+		while(i<pos-1) {
+			temp=temp.next;
+			i++;
+		}
+		newNode.next=temp.next;
+		temp.next=newNode;
+		return head;
+		
+	}
+	
+	
+	//To take input of LL
+	public static Node<Integer> takeInput(){
+		Node<Integer>head=null,tail=null;
+		Scanner s=new Scanner(System.in);
+		int data=s.nextInt();
+		while(data!=-1) {
+			Node<Integer> newNode=new Node<>(data);
+			if(head==null) {
+				head=newNode;
+				tail=newNode;
+			}
+			else {
+				tail.next=newNode;
+				tail=newNode;
+			}
+			data=s.nextInt();
+		}
+		return head;
+		
+	}
+
+	
+	public static void main(String[] args) {
+      Node<Integer> head=takeInput();
+      //head=insert(head,80,3);
+      //head=removeDuplicates(head);
+      print(head);
+	}
+      
+      
+      public static void print(Node<Integer> head) {
+      while(head!=null) {
+    	  System.out.print(head.data+" ");
+    	  head=head.next;
+      }
+      }
+
+}
