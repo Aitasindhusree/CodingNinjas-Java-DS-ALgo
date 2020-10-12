@@ -30,9 +30,7 @@ Sample Output 2 :
 1 11 3 9 6 8 0
 10 20 30 40*/
 CODE:
-public class Solution {
-
-	public static LinkedListNode<Integer> evenAfterOdd(LinkedListNode<Integer> head) {
+public static LinkedListNode<Integer> evenAfterOdd(LinkedListNode<Integer> head) {
         
         if(head==null ||head.next==null){
             return head;
