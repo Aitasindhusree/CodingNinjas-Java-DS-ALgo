@@ -1,0 +1,64 @@
+package stacks;
+
+public class stackUsingArray {
+	private int data[];
+	private int top; // is the index of topmost element of stack
+	
+	public stackUsingArray() {
+		data = new int[10];
+		top = -1;
+	}
+	
+	public stackUsingArray(int capacity) {
+		data = new int[capacity];
+		top = -1;
+	}
+	
+	public  boolean isEmpty(){
+		return (top == -1);
+	}
+	
+	public int size(){
+		return top + 1;	
+		}
+	
+	public int top() throws stackEmptyException{
+		if(size() == 0){
+			//StackEmptyException
+			stackEmptyException e = new stackEmptyException();
+			throw e;
+		}
+		return data[top];
+	}
+	
+	public void push(int elem) throws stackFullException{
+		if(size() == data.length){
+			// Stack Full
+			//stackFullException e = new stackFullException();
+			//throw e;
+			doublecapacity();
+		}
+		top++;
+		data[top] = elem;
+	}
+    private void doublecapacity() {
+    	int temp[]=data;
+    	data=new int[2*temp.length];
+    	for(int i=0;i<=top;i++) {
+    		data[i]=temp[i];
+    	}
+    }
+    
+    
+ 	public int pop() throws stackEmptyException{
+		if(size() == 0){
+			//StackEmptyException
+			stackEmptyException e = new stackEmptyException();
+			throw e;
+		}
+		int temp = data[top];
+		top--;
+		return temp;
+		
+	}
+}
