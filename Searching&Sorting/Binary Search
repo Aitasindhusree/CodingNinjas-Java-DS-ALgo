@@ -1,4 +1,4 @@
-
+//Time Complexity= O(logN), Space Complexity =O(1)
 public class Solution { 
 
     public static int binarySearch(int[] arr, int x) {
